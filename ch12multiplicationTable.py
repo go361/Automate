@@ -7,14 +7,17 @@
 Input a Number, The program will give you a
 Table of multiplication:
 """
+
+print(__doc__)
 import openpyxl
-from openpyxl.cell.cell import (get_column_letter, column_index_from_string
+from openpyxl.utils import (get_column_letter, column_index_from_string
 								)
 N = int(input("Please Input a Number:"))
-fileName = "Table of multiplication"
+fileName = "Table of multiplication.xlsx"
 wb = openpyxl.Workbook()
-sheet = wb.get_active_sheet()
-sheet.title = fileName
+# sheet = wb.get_active_sheet()
+sheet = wb.active
+sheet.title = fileName.split('.')[0]
 
 for n in range(1, N + 1):
 	sheet.row_dimensions[n].height = 20
@@ -25,4 +28,5 @@ for row in range(1, N + 1):
 	for col in range(1, N + 1):
 		sheet.cell(row = row + 1, column = col + 1).value = row * col
 
-wb.save(fileName + ".xlsx")
+wb.save(fileName)
+
